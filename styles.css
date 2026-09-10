@@ -155,6 +155,98 @@ img {
 }
 
 /* ===================================
+   INTRO ANIMATION
+   =================================== */
+.intro {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 50%, rgba(0, 74, 173, 0.03) 100%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.intro.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.intro__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: introFadeIn 0.8s ease forwards;
+}
+
+.intro__shield {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 60px;
+    box-shadow: 0 20px 60px rgba(0, 74, 173, 0.3);
+}
+
+.intro__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.intro__name {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--gray-900);
+    letter-spacing: -0.5px;
+}
+
+.intro__subtitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 4px;
+}
+
+.intro__logo.animate {
+    animation: introShrink 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes introFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes introShrink {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(0.5) translateY(-100px);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.2) translateY(-300px);
+    }
+}
+
+/* ===================================
    HEADER
    =================================== */
 .header {

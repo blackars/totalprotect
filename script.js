@@ -4,6 +4,23 @@
    =================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Intro Animation ---
+    const intro = document.getElementById('intro');
+    const introLogo = intro?.querySelector('.intro__logo');
+
+    if (intro && introLogo) {
+        setTimeout(() => {
+            introLogo.classList.add('animate');
+        }, 1200);
+
+        setTimeout(() => {
+            intro.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }, 2200);
+
+        document.body.style.overflow = 'hidden';
+    }
+
     // --- Mobile Menu ---
     const navToggle = document.getElementById('nav-toggle');
     const navClose = document.getElementById('nav-close');
