@@ -819,14 +819,14 @@ img {
 }
 
 .client-logo {
-    min-width: 200px;
-    height: 100px;
+    min-width: 260px;
+    height: 130px;
     background-color: #FFFFFF !important;
     border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 30px;
+    padding: 26px 39px;
     box-shadow: var(--shadow);
     transition: var(--transition);
     border: 1px solid var(--gray-100);
@@ -838,8 +838,8 @@ img {
 }
 
 .client-logo img {
-    max-height: 50px;
-    max-width: 140px;
+    max-height: 65px;
+    max-width: 182px;
     object-fit: contain;
     background-color: #FFFFFF;
 }
@@ -1360,6 +1360,6 @@ img {
     }
     
     .client-logo {
-        min-width: 160px;
+        min-width: 208px;
     }
 }
