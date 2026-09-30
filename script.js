@@ -56,110 +56,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Clients Carousel ---
+    // --- Clients Carousel (bucle infinito automático, sin controles) ---
     const track = document.getElementById('clients-track');
-    const prevBtn = document.getElementById('client-prev');
-    const nextBtn = document.getElementById('client-next');
-    const dotsContainer = document.getElementById('clients-dots');
-    
-    if (track && prevBtn && nextBtn && dotsContainer) {
-        const logos = track.querySelectorAll('.client-logo');
-        let currentIndex = 0;
-        let itemsToShow = getItemsToShow();
-        
-        function getItemsToShow() {
-            const width = window.innerWidth;
-            if (width < 640) return 1;
-            if (width < 900) return 2;
-            if (width < 1200) return 3;
-            return 4;
-        }
-        
-        function getMaxIndex() {
-            return Math.max(0, logos.length - itemsToShow);
-        }
-        
-        function createDots() {
-            dotsContainer.innerHTML = '';
-            const numDots = getMaxIndex() + 1;
-            
-            for (let i = 0; i < numDots; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('clients__dot');
-                if (i === currentIndex) dot.classList.add('active');
-                
-                dot.addEventListener('click', () => {
-                    currentIndex = i;
-                    updateCarousel();
-                });
-                
-                dotsContainer.appendChild(dot);
-            }
-        }
-        
-        function updateCarousel() {
-            const logoWidth = logos[0].offsetWidth;
-            const gap = 40;
-            const offset = currentIndex * (logoWidth + gap);
-            
-            track.style.transform = `translateX(-${offset}px)`;
-            
-            const dots = dotsContainer.querySelectorAll('.clients__dot');
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
-            });
-        }
-        
-        prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
-        });
-        
-        nextBtn.addEventListener('click', () => {
-            if (currentIndex < getMaxIndex()) {
-                currentIndex++;
-                updateCarousel();
-            }
-        });
-        
-        window.addEventListener('resize', () => {
-            itemsToShow = getItemsToShow();
-            if (currentIndex > getMaxIndex()) {
-                currentIndex = getMaxIndex();
-            }
-            createDots();
-            updateCarousel();
-        });
-        
-        createDots();
-        updateCarousel();
-        
-        // Auto-slide
-        let autoSlide = setInterval(() => {
-            if (currentIndex < getMaxIndex()) {
-                currentIndex++;
-            } else {
-                currentIndex = 0;
-            }
-            updateCarousel();
-        }, 4000);
-        
-        track.addEventListener('mouseenter', () => {
-            clearInterval(autoSlide);
-        });
-        
-        track.addEventListener('mouseleave', () => {
-            autoSlide = setInterval(() => {
-                if (currentIndex < getMaxIndex()) {
-                    currentIndex++;
-                } else {
-                    currentIndex = 0;
+
+    if (track) {
+        // Duplicar logos para un bucle seamless (la animación CSS desplaza -50%).
+        // Se clona una sola vez; las copias van con aria-hidden para accesibilidad.
+        if (track.children.length > 0 && !track.dataset.loopReady) {
+            const originals = Array.from(track.children);
+            originals.forEach((logo) => {
+                const clone = logo.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                const img = clone.querySelector('img');
+                if (img) {
+                    img.setAttribute('loading', 'lazy');
+                    img.removeAttribute('id');
                 }
-                updateCarousel();
-            }, 4000);
-        });
+                track.appendChild(clone);
+            });
+            track.dataset.loopReady = 'true';
+        }
     }
 
     // --- Smooth Scroll for anchor links ---
