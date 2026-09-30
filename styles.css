@@ -795,15 +795,19 @@ img {
 
 /* ===================================
    CLIENTS
+   NOTA: El carrusel de clientes debe mantener fondo BLANCO
+   (#FFFFFF) aunque se modifiquen otras secciones del sitio.
+   No cambiar estos backgrounds a gris/oscuro.
    =================================== */
 .clients {
     padding: 100px 0;
-    background: var(--gray-50);
+    background-color: #FFFFFF !important;
 }
 
 .clients__carousel {
     position: relative;
     overflow: hidden;
+    background-color: #FFFFFF !important;
 }
 
 .clients__track {
@@ -811,12 +815,13 @@ img {
     gap: 40px;
     transition: transform 0.5s ease;
     padding: 20px 0;
+    background-color: #FFFFFF !important;
 }
 
 .client-logo {
     min-width: 200px;
     height: 100px;
-    background: var(--white);
+    background-color: #FFFFFF !important;
     border-radius: 0;
     display: flex;
     align-items: center;
@@ -824,6 +829,7 @@ img {
     padding: 20px 30px;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    border: 1px solid var(--gray-100);
 }
 
 .client-logo:hover {
@@ -835,6 +841,7 @@ img {
     max-height: 50px;
     max-width: 140px;
     object-fit: contain;
+    background-color: #FFFFFF;
 }
 
 .client-logo span {
